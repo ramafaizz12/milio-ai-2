@@ -15,6 +15,8 @@ import {
   PiCalendarPlusDuotone,
   PiCaretCircleUpDownDuotone,
   PiChartBarDuotone,
+  PiBroadcast,
+  PiContactlessPaymentFill,
   PiChartLineUpDuotone,
   PiChatCenteredDotsDuotone,
   PiCodesandboxLogoDuotone,
@@ -41,10 +43,14 @@ import {
   PiPushPinDuotone,
   PiRocketLaunchDuotone,
   PiShapesDuotone,
+  PiFinnTheHumanBold,
   PiShieldCheckDuotone,
   PiShootingStarDuotone,
   PiShoppingCartDuotone,
   PiSparkleDuotone,
+  PiRobotBold,
+  PiChatDotsFill,
+  PiChatTeardropFill,
   PiSquaresFourDuotone,
   PiStepsDuotone,
   PiTableDuotone,
@@ -62,6 +68,11 @@ export const menuItems = [
   },
   // label end
   {
+    name: 'Chat',
+    href: routes.chat.dashboard,
+    icon: <PiChatDotsFill />,
+  },
+  {
     name: 'File Manager',
     href: '/',
     icon: <PiFolder />,
@@ -73,8 +84,14 @@ export const menuItems = [
   },
   {
     name: 'Billings',
-    href: routes.pos.index,
+    href: routes.billings.dashboard,
     icon: <PiCreditCardDuotone />,
+  },
+
+  {
+    name: 'Connected Platform',
+    href: routes.connectedPlatform.dashboard,
+    icon: <PiChatTeardropFill />,
   },
   {
     name: 'Executive',
@@ -106,6 +123,26 @@ export const menuItems = [
     name: 'Job Board',
     href: routes.jobBoard.dashboard,
     icon: <PiShapesDuotone />,
+  },
+  {
+    name: 'Broadcast',
+    href: routes.broadcast.dashboard,
+    icon: <PiBroadcast />,
+  },
+  {
+    name: 'Contact',
+    href: routes.contact.dashboard,
+    icon: <PiContactlessPaymentFill />,
+  },
+  {
+    name: 'AI Agent',
+    href: routes.aiagent.dashboard,
+    icon: <PiRobotBold />,
+  },
+  {
+    name: 'Human Agent',
+    href: routes.humanagent.dashboard,
+    icon: <PiFinnTheHumanBold />,
   },
   {
     name: 'Financial',

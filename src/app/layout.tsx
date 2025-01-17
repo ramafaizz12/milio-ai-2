@@ -12,6 +12,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import '@/app/globals.css';
 import { AuthProvider } from './api/auth/auth.context';
+import { usePlans } from './api/plan/usePlan';
 
 export const metadata = {
   title: siteConfig.title,

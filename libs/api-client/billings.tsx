@@ -24,13 +24,11 @@ export const getmySubcription = async (): Promise<BillingHistoryDataType[]> => {
   return data;
 };
 
-export const createSubcription = async (
-  plan_id: number,
-  duration: string
-): Promise<any> => {
-  const { data } = await apiClient.post(`subscription/create-with-payment`, {
+export const createSubcription = async (plan_id: number, duration: string) => {
+  const response = await apiClient.post(`subscription/create-with-payment`, {
     plan_id: plan_id,
     duration: duration,
   });
-  return data;
+  console.log('Response from create subscription API:', response.data);
+  return response;
 };

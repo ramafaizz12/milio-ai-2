@@ -8,7 +8,7 @@ import POSDrawer from '@/app/shared/point-of-sale/pos-drawer';
 import PosSearch from '@/app/shared/point-of-sale/pos-search';
 
 export const metadata = {
-  ...metaObject('Point of Sale'),
+  ...metaObject('Billings'),
 };
 
 const pageHeader = {
@@ -24,7 +24,7 @@ const pageHeader = {
   ],
 };
 
-export default function PointOfSalePage() {
+export default function BillingsPage() {
   return (
     <CartProvider cartKey={POS_CART_KEY}>
       <div>

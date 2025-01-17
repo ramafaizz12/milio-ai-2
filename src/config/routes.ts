@@ -1,3 +1,5 @@
+import { add } from 'lodash';
+
 export const routes = {
   eCommerce: {
     dashboard: '/ecommerce',
@@ -36,6 +38,29 @@ export const routes = {
     createTemplate: '/support/templates/create',
     viewTemplate: (id: string) => `/support/templates/${id}`,
     editTemplate: (id: string) => `/support/templates/${id}/edit`,
+  },
+  broadcast: {
+    dashboard: '/broadcast',
+  },
+  contact: {
+    dashboard: '/contact',
+  },
+  billings: {
+    dashboard: '/billings',
+  },
+  aiagent: {
+    dashboard: '/ai-agent',
+  },
+  humanagent: {
+    dashboard: '/human-agent',
+  },
+  connectedPlatform: {
+    dashboard: '/connected-platform',
+    addConnected: '/connected-platform/add',
+    editConnected: '/connected-platform/edit',
+  },
+  chat: {
+    dashboard: '/chat',
   },
   logistics: {
     dashboard: '/logistics',

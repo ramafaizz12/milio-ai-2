@@ -28,6 +28,7 @@ apiClient.interceptors.response.use(
     if (error.response?.status === 401) {
       // Token kadaluwarsa atau tidak valid
       // Redirect ke halaman login, misalnya
+      removeToken();
       window.location.href = '/auth/sign-in-1';
     }
     return Promise.reject(error);
