@@ -11,36 +11,21 @@ import { LAYOUT_OPTIONS } from '@/config/enums';
 
 const menuItems = [
   {
-    label: 'My Details',
-    value: '/forms/profile-settings',
+    label: 'Recipient',
+    value: '/broadcast/receipents',
   },
-  // {
-  //   label: 'Profile',
-  //   value: '/forms/profile-settings/profile',
-  // },
   {
-    label: 'Password',
-    value: '/forms/profile-settings/password',
+    label: 'Template Message',
+    value: '/broadcast/templates',
   },
-  // {
-  //   label: 'Team',
-  //   value: '/forms/profile-settings/team',
-  // },
+
   {
-    label: 'Billing',
-    value: '/forms/profile-settings/billing',
+    label: 'Campaign',
+    value: '/broadcast/campaigns',
   },
-  // {
-  //   label: 'Notifications',
-  //   value: '/forms/profile-settings/notification',
-  // },
-  // {
-  //   label: 'Integrations',
-  //   value: '/forms/profile-settings/integration',
-  // },
 ];
 
-export default function ProfileSettingsNav() {
+export default function BroadcastNav() {
   const pathname = usePathname();
   const { layout } = useLayout();
   const {

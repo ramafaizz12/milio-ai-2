@@ -39,8 +39,12 @@ export const routes = {
     viewTemplate: (id: string) => `/support/templates/${id}`,
     editTemplate: (id: string) => `/support/templates/${id}/edit`,
   },
+
   broadcast: {
     dashboard: '/broadcast',
+    campaigns: '/broadcast/campaigns',
+    receipents: '/broadcast/receipents',
+    templates: '/broadcast/templates',
   },
   contact: {
     dashboard: '/contact',
@@ -54,6 +58,7 @@ export const routes = {
   humanagent: {
     dashboard: '/human-agent',
   },
+
   connectedPlatform: {
     dashboard: '/connected-platform',
     addConnected: '/connected-platform/add',

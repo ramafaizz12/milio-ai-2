@@ -77,11 +77,7 @@ export const menuItems = [
     href: '/',
     icon: <PiFolder />,
   },
-  {
-    name: 'Appointment',
-    href: routes.appointment.dashboard,
-    icon: <PiCalendarDuotone />,
-  },
+
   {
     name: 'Billings',
     href: routes.billings.dashboard,
@@ -93,37 +89,13 @@ export const menuItems = [
     href: routes.connectedPlatform.dashboard,
     icon: <PiChatTeardropFill />,
   },
-  {
-    name: 'Executive',
-    href: routes.executive.dashboard,
-    icon: <PiBriefcaseDuotone />,
-  },
+
   {
     name: 'Project',
     href: routes.project.dashboard,
     icon: <ProjectWriteIcon />,
   },
-  {
-    name: 'CRM',
-    href: routes.crm.dashboard,
-    icon: <CrmDashIcon />,
-  },
-  {
-    name: 'Affiliate',
-    href: routes.affiliate.dashboard,
-    icon: <AffiliateIcon />,
-    badge: 'NEW',
-  },
-  {
-    name: 'Social Media',
-    href: routes.socialMedia.dashboard,
-    icon: <PiSparkleDuotone />,
-  },
-  {
-    name: 'Job Board',
-    href: routes.jobBoard.dashboard,
-    icon: <PiShapesDuotone />,
-  },
+
   {
     name: 'Broadcast',
     href: routes.broadcast.dashboard,
@@ -154,11 +126,7 @@ export const menuItems = [
     href: routes.logistics.dashboard,
     icon: <PiPackageDuotone />,
   },
-  {
-    name: 'E-Commerce',
-    href: routes.eCommerce.dashboard,
-    icon: <PiShoppingCartDuotone />,
-  },
+
   {
     name: 'Analytics',
     href: routes.analytics,

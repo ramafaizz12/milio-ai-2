@@ -5,14 +5,15 @@ export const metadata = {
   ...metaObject('Password'),
 };
 
-export default function ProfileSettingsFormPage() {
+export default function ProfileSettingsFormPageee() {
   return (
-    <PasswordSettingsView
-      settings={{
-        currentPassword: '9876543210',
-        newPassword: '',
-        confirmedPassword: '',
-      }}
-    />
+    <div></div>
+    // <PasswordSettingsView
+    //   settings={{
+    //     currentPassword: '9876543210',
+    //     newPassword: '',
+    //     confirmedPassword: '',
+    //   }}
+    // />
   );
 }
