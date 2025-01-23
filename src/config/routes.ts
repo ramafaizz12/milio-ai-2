@@ -54,6 +54,9 @@ export const routes = {
   },
   aiagent: {
     dashboard: '/ai-agent',
+    botsettings: '/ai-agent/detail-page',
+    general: '/ai-agent/detail-page/general',
+    knowledge: '/ai-agent/detail-page/knowledge',
   },
   humanagent: {
     dashboard: '/human-agent',

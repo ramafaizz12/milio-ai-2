@@ -1,6 +1,6 @@
 'use client';
 
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler } from 'react-hook-form';
 import { PiXBold } from 'react-icons/pi';
 import { ActionIcon, Button, Input, Select, Title } from 'rizzui';
 import cn from '@core/utils/class-names';
@@ -12,25 +12,9 @@ import {
   UserFormInput,
 } from '@/validators/create-agent.schema';
 import toast from 'react-hot-toast';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function AgentForm() {
   const { closeModal } = useModal();
-
-  // Inisialisasi useForm
-  const {
-    register,
-    control,
-    formState: { errors },
-  } = useForm<UserFormInput>({
-    defaultValues: {
-      name: '',
-      email: '',
-      password: '',
-      role: 'Agent', // Default role
-    },
-    resolver: zodResolver(userFormSchema),
-  });
 
   const onSubmit: SubmitHandler<UserFormInput> = async (data) => {
     try {
@@ -71,7 +55,12 @@ export default function AgentForm() {
         onSubmit={onSubmit}
         className="grid grid-cols-1 gap-5 @container md:grid-cols-2 [&_label]:font-medium"
       >
-        {() => (
+        {({
+          register,
+          watch,
+          control,
+          formState: { errors, isSubmitting },
+        }) => (
           <>
             <Input
               label="Agent Name"
@@ -110,7 +99,10 @@ export default function AgentForm() {
                     { label: 'Admin', value: 'Admin' },
                   ]}
                   value={value}
-                  onChange={onChange}
+                  onChange={(selected: { value: string }) => {
+                    console.log('MultiSelect changed:', selected);
+                    onChange(selected.value);
+                  }}
                   labelClassName="font-medium text-gray-900 dark:text-white"
                   dropdownClassName="p-2 gap-1 grid !z-[10] h-auto"
                 />
@@ -126,6 +118,7 @@ export default function AgentForm() {
                 Cancel
               </Button>
               <Button
+                isLoading={isSubmitting}
                 type="submit"
                 className="hover:gray-700 w-full @xl:w-auto"
               >

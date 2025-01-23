@@ -67,15 +67,16 @@ export const menuItems = [
     name: 'Overview',
   },
   // label end
+
+  {
+    name: 'Dashboard',
+    href: '/',
+    icon: <PiFolder />,
+  },
   {
     name: 'Chat',
     href: routes.chat.dashboard,
     icon: <PiChatDotsFill />,
-  },
-  {
-    name: 'File Manager',
-    href: '/',
-    icon: <PiFolder />,
   },
 
   {
@@ -88,12 +89,6 @@ export const menuItems = [
     name: 'Connected Platform',
     href: routes.connectedPlatform.dashboard,
     icon: <PiChatTeardropFill />,
-  },
-
-  {
-    name: 'Project',
-    href: routes.project.dashboard,
-    icon: <ProjectWriteIcon />,
   },
 
   {
@@ -116,11 +111,7 @@ export const menuItems = [
     href: routes.humanagent.dashboard,
     icon: <PiFinnTheHumanBold />,
   },
-  {
-    name: 'Financial',
-    href: routes.financial.dashboard,
-    icon: <PiCurrencyCircleDollarDuotone />,
-  },
+
   {
     name: 'Logistics',
     href: routes.logistics.dashboard,

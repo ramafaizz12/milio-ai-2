@@ -1,24 +1,14 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { ActionIcon, Button, Input, Modal, Select, Title } from 'rizzui';
 import cn from '@core/utils/class-names';
 import { botData } from '@/data/bot-data';
-import { PiXBold } from 'react-icons/pi';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
-
-export type PlatformData = {
-  id: number;
-  platform_name: string;
-  platform_type: string;
-  platform_account_id: string;
-  phone_number_id: string;
-  status: string;
-  created_at: string;
-};
 
 export default function ConnectedPreview({
   icon,
@@ -30,48 +20,12 @@ export default function ConnectedPreview({
 }: {
   icon: StaticImport;
   title?: string;
-  bot?: typeof botData;
+  bot?: (typeof botData.data)[0];
   preview: string;
   className?: string;
   description?: string;
 }) {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const bots = bot?.data;
-
-  const {
-    control,
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      name: '',
-      description: '',
-      bot: '',
-    },
-  });
-
-  const handleUpdateClick = () => {
-    setIsDialogOpen(true);
-  };
-
-  const handleCloseDialog = () => {
-    setIsDialogOpen(false);
-  };
-
-  const handleDeleteClick = () => {
-    // Tambahkan logika penghapusan di sini, misalnya API call
-    console.log('Delete clicked');
-    toast.success('Item deleted successfully!');
-  };
-
-  const onSubmit: SubmitHandler<{ name: string; description: string }> = (
-    data
-  ) => {
-    console.log('Form Data:', data);
-    toast.success('Form submitted successfully!');
-    handleCloseDialog();
-  };
+  const bots = bot;
 
   return (
     <div
@@ -98,20 +52,22 @@ export default function ConnectedPreview({
             </p>
           </div>
           <div className="flex justify-center gap-4">
-            <Button
-              as="span"
-              size="lg"
-              className="w-auto"
-              onClick={handleUpdateClick}
+            <Link
+              href={{
+                pathname: '/ai-agent/detail-page',
+                query: { id: bot?.id },
+              }}
             >
-              Update
-            </Button>
+              <Button as="span" size="lg" className="w-auto">
+                Update
+              </Button>
+            </Link>
             <Button
               as="span"
               size="lg"
               variant="outline"
               className="w-auto border-red-600 text-red-600 hover:bg-red-600 hover:text-white"
-              onClick={handleDeleteClick}
+              // onClick={handleDeleteClick}
             >
               Delete
             </Button>

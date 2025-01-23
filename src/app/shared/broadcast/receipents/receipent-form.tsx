@@ -1,52 +1,59 @@
 'use client';
 
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler } from 'react-hook-form';
 import { PiXBold } from 'react-icons/pi';
-import { ActionIcon, Button, Input, Select, Title } from 'rizzui';
+import { ActionIcon, Button, Input, Select, MultiSelect, Title } from 'rizzui';
 import cn from '@core/utils/class-names';
 import { Form } from '@core/ui/form';
-import { addAgent } from 'libs/api-client/human';
-import { useModal } from '@/app/shared/modal-views/use-modal';
-import {
-  userFormSchema,
-  UserFormInput,
-} from '@/validators/create-agent.schema';
 import toast from 'react-hot-toast';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { createReceipents } from 'libs/api-client/broadcast';
+import { useContacts } from '@/app/api/contact/useContact';
+import { usePlatform } from '@/app/api/platform/usePlatform';
+import * as z from 'zod';
+import { useModal } from '../../modal-views/use-modal';
+
+// Validasi schema
+const receipentFormSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  platform_id: z.string().min(1, 'Platform is required'),
+  contact_ids: z
+    .array(z.string().min(1))
+    .nonempty('At least one contact is required'),
+});
+
+type ReceipentFormInput = z.infer<typeof receipentFormSchema>;
 
 export default function ReceipentForm() {
   const { closeModal } = useModal();
+  const { data: platformapi } = usePlatform();
+  const { data: contactsapi } = useContacts();
 
-  // Inisialisasi useForm
-  const {
-    register,
-    control,
-    formState: { errors },
-  } = useForm<UserFormInput>({
-    defaultValues: {
-      name: '',
-      email: '',
-      password: '',
-      role: 'Agent', // Default role
-    },
-    resolver: zodResolver(userFormSchema),
-  });
+  const platforms =
+    platformapi?.data.map((platform) => ({
+      value: platform.id.toString(),
+      label: platform.platform_name,
+    })) || [];
 
-  const onSubmit: SubmitHandler<UserFormInput> = async (data) => {
+  const contacts =
+    contactsapi?.map((contact) => ({
+      value: contact.id,
+      label: contact.name,
+    })) || [];
+
+  const onSubmit: SubmitHandler<ReceipentFormInput> = async (data) => {
     try {
       console.log('Submitted Data:', data);
-      // Contoh API call
-      const response = await addAgent(data); // Ganti dengan fungsi API Anda
-      if (response.status == 201) {
-        toast.success('Agent created successfully!');
+      const response = await createReceipents(data);
+      if (response.status === 201) {
+        toast.success('Recipient list created successfully!');
+
         closeModal();
       } else {
-        console.log('Failed to create agent');
-        toast.error('Failed to create agent.');
+        toast.error('Failed to create recipient list.');
       }
     } catch (error) {
-      console.log('Submitted Error:', error);
-      toast.error('Failed to create agent.');
+      console.error('Error during submission:', error);
+      toast.error('An error occurred while creating the recipient list.');
     }
   };
 
@@ -54,7 +61,7 @@ export default function ReceipentForm() {
     <div className="m-auto p-4 md:px-7 md:py-10">
       <div className="mb-6 flex items-center justify-between">
         <Title as="h3" className="text-lg">
-          Create a new agent
+          Create a new recipient list
         </Title>
         <ActionIcon
           size="sm"
@@ -66,74 +73,91 @@ export default function ReceipentForm() {
         </ActionIcon>
       </div>
 
-      <Form<UserFormInput>
-        validationSchema={userFormSchema}
+      <Form<ReceipentFormInput>
+        validationSchema={receipentFormSchema}
         onSubmit={onSubmit}
+        useFormProps={{
+          defaultValues: {
+            name: '',
+            platform_id: '',
+            contact_ids: [],
+          },
+        }}
         className="grid grid-cols-1 gap-5 @container md:grid-cols-2 [&_label]:font-medium"
       >
-        {() => (
-          <>
-            <Input
-              label="Agent Name"
-              placeholder="Enter agent's name"
-              {...register('name')}
-              className="col-span-full"
-              error={errors.name?.message}
-            />
+        {({
+          register,
+          control,
+          watch,
+          formState: { errors, isSubmitting },
+        }) => {
+          return (
+            <>
+              <Input
+                label="List Name"
+                placeholder="Enter list name"
+                {...register('name')}
+                className="col-span-full"
+                error={errors.name?.message}
+              />
 
-            <Input
-              label="Agent Email"
-              placeholder="Enter agent's email"
-              {...register('email')}
-              className="col-span-full"
-              error={errors.email?.message}
-            />
+              <Controller
+                control={control}
+                name="platform_id"
+                render={({ field: { value, onChange } }) => (
+                  <Select
+                    label="Platform"
+                    options={platforms}
+                    value={value}
+                    onChange={(selected: { value: string }) => {
+                      console.log('MultiSelect changed:', selected);
+                      onChange(selected.value);
+                    }}
+                    labelClassName="font-medium text-gray-900 dark:text-white"
+                    dropdownClassName="p-2 gap-1 grid !z-[10] h-auto"
+                    error={errors.platform_id?.message}
+                  />
+                )}
+              />
 
-            <Input
-              label="Password"
-              type="text"
-              placeholder="Enter a secure password"
-              {...register('password')}
-              className="col-span-full"
-              error={errors.password?.message}
-            />
+              <Controller
+                control={control}
+                name="contact_ids"
+                render={({ field: { value, onChange } }) => (
+                  <MultiSelect
+                    label="Contacts"
+                    options={contacts}
+                    value={value}
+                    onChange={(selected) => {
+                      console.log('MultiSelect changed:', selected);
+                      onChange(selected);
+                    }}
+                    labelClassName="font-medium text-gray-900 dark:text-white"
+                    dropdownClassName="p-2 gap-1 grid !z-[10] h-auto"
+                    error={errors.contact_ids?.message}
+                  />
+                )}
+              />
 
-            <Controller
-              control={control}
-              name="role"
-              render={({ field: { value, onChange } }) => (
-                <Select
-                  label="Role"
-                  options={[
-                    { label: 'Agent', value: 'Agent' },
-                    { label: 'Supervisor', value: 'Supervisor' },
-                    { label: 'Admin', value: 'Admin' },
-                  ]}
-                  value={value}
-                  onChange={onChange}
-                  labelClassName="font-medium text-gray-900 dark:text-white"
-                  dropdownClassName="p-2 gap-1 grid !z-[10] h-auto"
-                />
-              )}
-            />
-
-            <div className={cn('col-span-full grid grid-cols-2 gap-4 pt-5')}>
-              <Button
-                variant="outline"
-                className="w-full @xl:w-auto dark:hover:border-gray-400"
-                onClick={() => closeModal()}
-              >
-                Cancel
-              </Button>
-              <Button
-                type="submit"
-                className="hover:gray-700 w-full @xl:w-auto"
-              >
-                Save
-              </Button>
-            </div>
-          </>
-        )}
+              <div className={cn('col-span-full grid grid-cols-2 gap-4 pt-5')}>
+                <Button
+                  variant="outline"
+                  className="w-full @xl:w-auto dark:hover:border-gray-400"
+                  onClick={() => closeModal()}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  isLoading={isSubmitting}
+                  type="submit"
+                  className="hover:gray-700 w-full @xl:w-auto"
+                >
+                  Save
+                </Button>
+              </div>
+            </>
+          );
+        }}
       </Form>
     </div>
   );

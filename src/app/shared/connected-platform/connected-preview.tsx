@@ -1,16 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { ActionIcon, Button, Input, Modal, Select, Title } from 'rizzui';
 import cn from '@core/utils/class-names';
 import { agentData } from '@/data/agent-data';
 import { botData } from '@/data/bot-data';
-import { PiXBold } from 'react-icons/pi';
+
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
-import { folders } from '@/data/snippets-and-templates';
+import ModalButton from '../modal-button';
+import UpdatePlatformForm from './modal-form';
 
 export type PlatformData = {
   id: number;
@@ -39,41 +36,9 @@ export default function ConnectedPreview({
   className?: string;
   description?: string;
 }) {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const bots = bot?.data;
   const agents = data?.agents.Agent;
   const superVisor = data?.agents.Supervisor;
-
-  const {
-    control,
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      name: '',
-      description: '',
-      agent: '',
-      supervisor: '',
-      bot: '',
-    },
-  });
-
-  const handleUpdateClick = () => {
-    setIsDialogOpen(true);
-  };
-
-  const handleCloseDialog = () => {
-    setIsDialogOpen(false);
-  };
-
-  const onSubmit: SubmitHandler<{ name: string; description: string }> = (
-    data
-  ) => {
-    console.log('Form Data:', data);
-    toast.success('Form submitted successfully!');
-    handleCloseDialog();
-  };
 
   return (
     <div
@@ -99,127 +64,14 @@ export default function ConnectedPreview({
               {description}
             </p>
           </div>
-          <Button
-            as="span"
-            size="lg"
-            className="mx-auto w-full"
-            onClick={handleUpdateClick}
-          >
-            Update
-          </Button>
+          <ModalButton
+            label="Update"
+            view={<UpdatePlatformForm />}
+            customSize="500px"
+            className="mb-3 mt-0 h-auto w-full @lg:w-auto"
+          />
         </div>
       </div>
-
-      {/* Modal */}
-      <Modal isOpen={isDialogOpen} onClose={handleCloseDialog}>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className={cn('max-w-full rounded-md p-6', className)}
-        >
-          <div className="flex items-center justify-between">
-            <Title as="h4" className="font-semibold">
-              Update
-            </Title>
-            <ActionIcon variant="text" onClick={() => handleCloseDialog()}>
-              <PiXBold className="h-5 w-5" />
-            </ActionIcon>
-          </div>
-
-          {/* Input Field */}
-          <Input
-            label={`Platform Name`}
-            placeholder={`Enter your Platform name`}
-            labelClassName="font-medium text-gray-900 dark:text-white capitalize"
-            {...register('name', { required: 'Name is required' })}
-            error={errors.name?.message}
-          />
-
-          <Controller
-            control={control}
-            name="agent"
-            render={({ field: { value, onChange } }) => (
-              <Select
-                label="Agent"
-                inPortal={false}
-                labelClassName="font-medium text-gray-900 dark:text-white"
-                dropdownClassName="p-2 gap-1 grid !z-[10] h-auto"
-                value={value}
-                onChange={onChange}
-                options={
-                  agents?.map((agent: any) => ({
-                    label: agent.display_name, // Sesuaikan properti `name` dengan API Anda
-                    value: agent.user_id, // Sesuaikan properti `id` dengan API Anda
-                  })) ?? []
-                }
-                getOptionValue={(option) => option.value}
-                displayValue={(selected: string) =>
-                  agents?.find((agent: any) => agent.user_id === selected)
-                    ?.display_name ?? ''
-                }
-              />
-            )}
-          />
-
-          <Controller
-            control={control}
-            name="supervisor"
-            render={({ field: { value, onChange } }) => (
-              <Select
-                label="Supervisor"
-                inPortal={false}
-                labelClassName="font-medium text-gray-900 dark:text-white"
-                dropdownClassName="p-2 gap-1 grid !z-[10] h-auto"
-                value={value}
-                onChange={onChange}
-                options={
-                  superVisor?.map((supervisor: any) => ({
-                    label: supervisor.display_name, // Sesuaikan properti `name` dengan API Anda
-                    value: supervisor.user_id, // Sesuaikan properti `id` dengan API Anda
-                  })) ?? []
-                }
-                getOptionValue={(option) => option.value}
-                displayValue={(selected: string) =>
-                  superVisor?.find(
-                    (supervisor: any) => supervisor.user_id === selected
-                  )?.display_name ?? ''
-                }
-              />
-            )}
-          />
-
-          <Controller
-            control={control}
-            name="bot"
-            render={({ field: { value, onChange } }) => (
-              <Select
-                label="Bot"
-                inPortal={false}
-                labelClassName="font-medium text-gray-900 dark:text-white"
-                dropdownClassName="p-2 gap-1 grid !z-[10] h-auto"
-                value={value}
-                onChange={onChange}
-                options={
-                  bots?.map((bots: any) => ({
-                    label: bots.name, // Sesuaikan properti `name` dengan API Anda
-                    value: bots.id, // Sesuaikan properti `id` dengan API Anda
-                  })) ?? []
-                }
-                getOptionValue={(option) => option.value}
-                displayValue={(selected: string) =>
-                  bots?.find((f) => f.id === selected)?.name ?? ''
-                }
-                // error={errors?.folder?.message as string}
-              />
-            )}
-          />
-          {/* Submit Button */}
-          <div className="col-span-full mt-2 flex items-center justify-end">
-            <Button type="submit" className="capitalize">
-              Submit
-            </Button>
-          </div>
-        </form>
-      </Modal>
     </div>
   );
 }

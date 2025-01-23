@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
-import { getReceipents } from 'libs/api-client/broadcast';
+import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
+import { getReceipents, createReceipents } from 'libs/api-client/broadcast';
 
 export const useReceipents = () => {
   return useQuery({
@@ -7,3 +7,6 @@ export const useReceipents = () => {
     queryKey: ['receipents'],
   });
 };
+// export function useCreateUser() {
+//   return useMutation(createReceipents);
+// }

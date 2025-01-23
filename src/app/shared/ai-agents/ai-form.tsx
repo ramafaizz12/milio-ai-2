@@ -1,52 +1,36 @@
 'use client';
 
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 import { PiXBold } from 'react-icons/pi';
-import { ActionIcon, Button, Input, Select, Title } from 'rizzui';
+import { ActionIcon, Button, Input, Title } from 'rizzui';
 import cn from '@core/utils/class-names';
 import { Form } from '@core/ui/form';
-import { addAgent } from 'libs/api-client/human';
+import { createBot } from 'libs/api-client/chatbot';
 import { useModal } from '@/app/shared/modal-views/use-modal';
-import {
-  userFormSchema,
-  UserFormInput,
-} from '@/validators/create-agent.schema';
 import toast from 'react-hot-toast';
-import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  addAIFormSchema,
+  AddaiFormInput,
+} from '@/validators/create-bot.schema';
 
 export default function AiForm() {
   const { closeModal } = useModal();
 
-  // Inisialisasi useForm
-  const {
-    register,
-    control,
-    formState: { errors },
-  } = useForm<UserFormInput>({
-    defaultValues: {
-      name: '',
-      email: '',
-      password: '',
-      role: 'Agent', // Default role
-    },
-    resolver: zodResolver(userFormSchema),
-  });
-
-  const onSubmit: SubmitHandler<UserFormInput> = async (data) => {
+  const onSubmit: SubmitHandler<AddaiFormInput> = async (data) => {
     try {
       console.log('Submitted Data:', data);
       // Contoh API call
-      const response = await addAgent(data); // Ganti dengan fungsi API Anda
+      const response = await createBot(data); // Ganti dengan fungsi API Anda
       if (response.status == 201) {
-        toast.success('Agent created successfully!');
+        toast.success('Bots created successfully!');
         closeModal();
       } else {
-        console.log('Failed to create agent');
-        toast.error('Failed to create agent.');
+        console.log('Failed to create bots');
+        toast.error('Failed to create bots.');
       }
     } catch (error) {
       console.log('Submitted Error:', error);
-      toast.error('Failed to create agent.');
+      toast.error('Failed to create bots.');
     }
   };
 
@@ -66,12 +50,23 @@ export default function AiForm() {
         </ActionIcon>
       </div>
 
-      <Form<UserFormInput>
-        validationSchema={userFormSchema}
+      <Form<AddaiFormInput>
+        validationSchema={addAIFormSchema}
         onSubmit={onSubmit}
+        useFormProps={{
+          defaultValues: {
+            name: '',
+            description: '',
+          },
+        }}
         className="grid grid-cols-1 gap-5 @container md:grid-cols-2 [&_label]:font-medium"
       >
-        {() => (
+        {({
+          register,
+
+          watch,
+          formState: { errors, isSubmitting },
+        }) => (
           <>
             <Input
               label="Bot Name"
@@ -84,9 +79,9 @@ export default function AiForm() {
             <Input
               label="Description"
               placeholder="Enter description"
-              {...register('email')}
+              {...register('description')}
               className="col-span-full"
-              error={errors.email?.message}
+              error={errors.description?.message}
             />
 
             <div className={cn('col-span-full grid grid-cols-2 gap-4 pt-5')}>
@@ -98,6 +93,7 @@ export default function AiForm() {
                 Cancel
               </Button>
               <Button
+                isLoading={isSubmitting}
                 type="submit"
                 className="hover:gray-700 w-full @xl:w-auto"
               >
