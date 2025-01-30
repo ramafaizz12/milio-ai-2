@@ -4,7 +4,7 @@ import { Button } from 'rizzui';
 import PageHeader from '@/app/shared/page-header';
 import { metaObject } from '@/config/site.config';
 import ChatInbox from '@/app/shared/chat/inbox';
-import { ChatTabList } from '@/app/shared/chat/inbox/inbox-tabs';
+import InboxTabs from '@/app/shared/chat/inbox/inbox-tabs';
 
 export const metadata = {
   ...metaObject('Inbox'),
@@ -33,7 +33,7 @@ export default function ChatPage() {
         </Button> */}
       </PageHeader>
 
-      <ChatTabList />
+      <InboxTabs />
 
       <ChatInbox />
     </>

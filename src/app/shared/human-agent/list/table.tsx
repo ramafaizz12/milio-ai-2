@@ -9,7 +9,7 @@ import { shipmentListColumns } from './columns';
 import { Box } from 'rizzui';
 import { exportToCSV } from '@core/utils/export-to-csv';
 import { useAgent } from '@/app/api/agent/useAgent';
-import { contactData } from '@/data/contact-data';
+import { useMemo } from 'react';
 
 export type ShipmentListTableDataType = {
   user_id: string;
@@ -20,22 +20,17 @@ export type ShipmentListTableDataType = {
   admin_id: string;
 };
 
-export type ContactDataType = (typeof contactData.data)[number];
 export default function ShipmentListTable() {
   const { data, isLoading, isError } = useAgent();
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
 
-  if (!data || data.agents.Agent.length === 0) {
-    return <p>No connected platforms found.</p>;
-  }
-  const combinedList = [
-    ...(data.agents.Supervisor || []),
-    ...(data.agents.Agent || []),
-  ];
+  // Pastikan Hooks dipanggil di luar kondisi
+  const combinedList = useMemo(() => {
+    if (!data || !data.agents) return [];
+    return [...(data.agents.Supervisor || []), ...(data.agents.Agent || [])];
+  }, [data]);
+
   const { table, setData } = useTanStackTable<ShipmentListTableDataType>({
-    tableData: combinedList || [], // Gunakan data dari React Query
+    tableData: combinedList, // Pastikan defaultnya selalu []
     columnConfig: shipmentListColumns,
     options: {
       initialState: {
@@ -44,7 +39,6 @@ export default function ShipmentListTable() {
           pageSize: 10,
         },
       },
-
       meta: {
         handleDeleteRow: (row) => {
           setData((prev) => prev.filter((r) => r.user_id !== row.id));
@@ -59,9 +53,10 @@ export default function ShipmentListTable() {
     },
   });
 
-  const selectedData = table
-    .getSelectedRowModel()
-    .rows.map((row) => row.original);
+  const selectedData = useMemo(
+    () => table.getSelectedRowModel().rows.map((row) => row.original),
+    [table]
+  );
 
   function handleExportData() {
     exportToCSV(
@@ -72,6 +67,8 @@ export default function ShipmentListTable() {
   }
 
   if (isLoading) return <p>Loading...</p>;
+  if (isError || combinedList.length === 0)
+    return <p>No connected platforms found.</p>;
 
   return (
     <Box>

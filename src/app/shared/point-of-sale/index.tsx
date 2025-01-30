@@ -6,7 +6,6 @@ import PostSidebar from './pos-sidebar';
 import { useCart } from '@/store/quick-cart/cart.context';
 import cn from '@core/utils/class-names';
 import PosStats from './pos-stats';
-import { usePlans } from '@/app/api/plan/usePlan';
 
 export default function POSPageView() {
   const { items, removeItemFromCart, clearItemFromCart } = useCart();

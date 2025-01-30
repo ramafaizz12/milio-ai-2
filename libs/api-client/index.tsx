@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getToken, removeToken } from 'libs/api-client/token_service';
+import Router from 'next/router';
 
 const apiClient = axios.create({
   baseURL: 'https://milio-monorepo-production.up.railway.app/',
@@ -29,7 +30,7 @@ apiClient.interceptors.response.use(
       // Token kadaluwarsa atau tidak valid
       // Redirect ke halaman login, misalnya
       removeToken();
-      window.location.href = '/auth/sign-in-1';
+      Router.push('/auth/sign-in-1');
     }
     return Promise.reject(error);
   }

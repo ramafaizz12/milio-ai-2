@@ -31,6 +31,7 @@ export default function SignInForm() {
       const response = await Signin(data.email, data.password);
       if (response.status === 200) {
         toast.success(<Text>Login Berhasil</Text>);
+
         router.push('/');
       } else {
         toast.error(<Text>Error, {response.data.message}</Text>);

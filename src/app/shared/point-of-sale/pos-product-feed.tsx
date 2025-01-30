@@ -5,8 +5,6 @@ import { Empty, SearchNotFoundIcon, Button } from 'rizzui';
 import ProductClassicCard from '@core/components/cards/product-classic-card';
 import { useAtomValue } from 'jotai';
 import { selectedCategoryAtom } from './pos-category-filters';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { useFilteredPlans } from '@/app/api/plan/usePlan';
 
 const PER_PAGE = 12;

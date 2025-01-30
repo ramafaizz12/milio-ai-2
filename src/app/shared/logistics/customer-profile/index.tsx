@@ -9,7 +9,6 @@ import PersonalInformation from '@/app/shared/logistics/customer-profile/persona
 import { getRandomArrayElement } from '@core/utils/get-random-array-element';
 import { useLayout } from '@/layouts/use-layout';
 import { LAYOUT_OPTIONS } from '@/config/enums';
-import { useBerylliumSidebars } from '@/layouts/beryllium/beryllium-utils';
 
 interface CustomerProfileProps {
   className?: string;
@@ -29,7 +28,7 @@ export default function CustomerProfile({ className }: CustomerProfileProps) {
 
 function CustomerCoverPhoto() {
   const { layout } = useLayout();
-  const { expandedLeft } = useBerylliumSidebars();
+
   const coverPhoto = getRandomArrayElement([
     '1648583076906-60338fa01f07',
     '1655962342982-57cae2d061cf',
@@ -42,7 +41,6 @@ function CustomerCoverPhoto() {
         layout === LAYOUT_OPTIONS.HELIUM &&
           'xl:-ms-[19px] 2xl:-ms-6 3xl:-ms-6 4xl:-ms-9',
         layout === LAYOUT_OPTIONS.BERYLLIUM &&
-          expandedLeft &&
           'xl:-ms-3 3xl:-ms-[10px] 4xl:-ms-[11px]'
       )}
     >
