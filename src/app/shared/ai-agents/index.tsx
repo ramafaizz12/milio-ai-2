@@ -19,7 +19,7 @@ export default function AiAgentsDashboard() {
         label="Create New"
         view={<AiForm />}
         customSize="900px"
-        className="mb-3 mt-0 h-auto h-full w-full @lg:w-auto"
+        className="mb-3 mt-0 h-auto w-full @lg:w-auto"
       />
     );
   }
@@ -40,7 +40,7 @@ export default function AiAgentsDashboard() {
           label="Create New"
           view={<AiForm />}
           customSize="900px"
-          className="mb-3 mt-0 h-auto h-full w-full @lg:w-auto"
+          className="mb-3 mt-0 h-auto w-full @lg:w-auto"
         />
       </div>
     </div>

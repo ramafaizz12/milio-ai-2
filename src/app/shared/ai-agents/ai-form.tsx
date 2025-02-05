@@ -6,6 +6,7 @@ import { ActionIcon, Button, Input, Title } from 'rizzui';
 import cn from '@core/utils/class-names';
 import { Form } from '@core/ui/form';
 import { createBot } from 'libs/api-client/chatbot';
+import { useCreateBot } from '@/app/api/chatbot/useBot';
 import { useModal } from '@/app/shared/modal-views/use-modal';
 import toast from 'react-hot-toast';
 import {
@@ -15,23 +16,21 @@ import {
 
 export default function AiForm() {
   const { closeModal } = useModal();
+  const { mutate, isPending } = useCreateBot();
 
-  const onSubmit: SubmitHandler<AddaiFormInput> = async (data) => {
-    try {
-      console.log('Submitted Data:', data);
-      // Contoh API call
-      const response = await createBot(data); // Ganti dengan fungsi API Anda
-      if (response.status == 201) {
-        toast.success('Bots created successfully!');
+  const onSubmit: SubmitHandler<AddaiFormInput> = (data) => {
+    console.log('Submitted Data:', data);
+
+    mutate(data, {
+      onSuccess: () => {
+        toast.success('Bot created successfully!');
         closeModal();
-      } else {
-        console.log('Failed to create bots');
-        toast.error('Failed to create bots.');
-      }
-    } catch (error) {
-      console.log('Submitted Error:', error);
-      toast.error('Failed to create bots.');
-    }
+      },
+      onError: (error: any) => {
+        console.error('Mutation Error:', error);
+        toast.error(error?.message || 'Failed to create bot.');
+      },
+    });
   };
 
   return (
@@ -93,7 +92,7 @@ export default function AiForm() {
                 Cancel
               </Button>
               <Button
-                isLoading={isSubmitting}
+                isLoading={isPending}
                 type="submit"
                 className="hover:gray-700 w-full @xl:w-auto"
               >

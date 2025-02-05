@@ -1,4 +1,3 @@
-import InboxTabs from '@/app/shared/chat/inbox/inbox-tabs';
 import MessageList from '@/app/shared/chat/inbox/message-list';
 
 export default function ChatInbox() {

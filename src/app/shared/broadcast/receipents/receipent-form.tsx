@@ -46,7 +46,7 @@ export default function ReceipentForm() {
       const response = await createReceipents(data);
       if (response.status === 201) {
         toast.success('Recipient list created successfully!');
-
+        console.log(response.data);
         closeModal();
       } else {
         toast.error('Failed to create recipient list.');

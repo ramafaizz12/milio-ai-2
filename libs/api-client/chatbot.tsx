@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import apiClient from './index';
 import { botData } from '@/data/bot-data';
 
@@ -11,12 +12,15 @@ export const deleteBot = async (id: string) => {
   return await apiClient.delete(`bots/${id}`);
 };
 
-export const createBot = async (data: {
+export interface CreateBotResponse {
+  success: boolean;
+}
+export async function createBot(data: {
   name: string;
   description: string;
-}) => {
-  return await apiClient.post(`bots`, data);
-};
+}): Promise<AxiosResponse<CreateBotResponse>> {
+  return await apiClient.post<CreateBotResponse>('/bots', data);
+}
 
 export const trainBot = async (id: string, file: string) => {
   return await apiClient.post(`bots/${id}/training/files`, file);
