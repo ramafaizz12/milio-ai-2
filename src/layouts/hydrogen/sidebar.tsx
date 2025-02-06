@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import cn from '@core/utils/class-names';
 import SimpleBar from '@core/ui/simplebar';
+import logonew from '@public/Frame 10.svg';
 import Logo from '@core/components/logo';
 import { SidebarMenu } from './sidebar-menu';
 
