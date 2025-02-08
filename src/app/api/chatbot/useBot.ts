@@ -6,7 +6,6 @@ import {
   deleteBot,
   trainBot,
 } from 'libs/api-client/chatbot';
-import { boolean } from 'zod';
 
 export const useBot = () => {
   return useQuery({

@@ -1,63 +1,19 @@
 import { DUMMY_ID } from '@/config/constants';
 import { routes } from '@/config/routes';
-import AffiliateIcon from '@core/components/icons/affiliate';
-import CrmDashIcon from '@core/components/icons/crm-icon';
-import ProjectWriteIcon from '@core/components/icons/project-write';
+import { GoOrganization } from 'react-icons/go';
 import {
-  PiAirplaneTiltDuotone,
-  PiArrowsOut,
-  PiArrowsOutLineHorizontalBold,
-  PiBellSimpleRingingDuotone,
-  PiBinocularsDuotone,
-  PiBriefcaseDuotone,
-  PiBrowserDuotone,
-  PiCalendarDuotone,
-  PiCalendarPlusDuotone,
-  PiCaretCircleUpDownDuotone,
   PiChartBarDuotone,
   PiBroadcast,
   PiContactlessPaymentFill,
-  PiChartLineUpDuotone,
-  PiChatCenteredDotsDuotone,
-  PiCodesandboxLogoDuotone,
-  PiCoinDuotone,
   PiCreditCardDuotone,
-  PiCurrencyCircleDollarDuotone,
-  PiCurrencyDollarDuotone,
-  PiEnvelopeDuotone,
-  PiEnvelopeSimpleOpenDuotone,
-  PiFeatherDuotone,
   PiFolder,
-  PiFolderLockDuotone,
-  PiGridFourDuotone,
-  PiHammerDuotone,
   PiHeadsetDuotone,
-  PiHourglassSimpleDuotone,
-  PiHouseLineDuotone,
-  PiListNumbersDuotone,
-  PiLockKeyDuotone,
-  PiMapPinLineDuotone,
-  PiNewspaperClippingDuotone,
-  PiNoteBlankDuotone,
   PiPackageDuotone,
-  PiPushPinDuotone,
-  PiRocketLaunchDuotone,
-  PiShapesDuotone,
   PiFinnTheHumanBold,
-  PiShieldCheckDuotone,
-  PiShootingStarDuotone,
   PiShoppingCartDuotone,
-  PiSparkleDuotone,
   PiRobotBold,
   PiChatDotsFill,
   PiChatTeardropFill,
-  PiSquaresFourDuotone,
-  PiStepsDuotone,
-  PiTableDuotone,
-  PiUserCircleDuotone,
-  PiUserDuotone,
-  PiUserGearDuotone,
-  PiUserPlusDuotone,
 } from 'react-icons/pi';
 
 // Note: do not add href in the label object, it is rendering as label
@@ -110,6 +66,11 @@ export const menuItems = [
     name: 'Human Agent',
     href: routes.humanagent.dashboard,
     icon: <PiFinnTheHumanBold />,
+  },
+  {
+    name: 'Organization',
+    href: routes.organization.dashboard,
+    icon: <GoOrganization />,
   },
 
   {

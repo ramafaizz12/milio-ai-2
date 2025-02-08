@@ -61,10 +61,16 @@ export const routes = {
   humanagent: {
     dashboard: '/human-agent',
   },
+  organization: {
+    dashboard: '/organization',
+    businesses: '/organization/businesses',
+    division: '/organization/division',
+    team: '/organization/team',
+  },
 
   connectedPlatform: {
     dashboard: '/connected-platform',
-    addConnected: '/connected-platform/add',
+    addConnected: '/connected-platform/platform-add',
     editConnected: '/connected-platform/edit',
   },
   chat: {

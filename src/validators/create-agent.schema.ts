@@ -22,6 +22,20 @@ export const userFormSchema = z.object({
       (value) => ['Agent', 'Supervisor', 'Admin'].includes(value),
       { message: 'Invalid role. Allowed values: Agent, Supervisor, Admin.' } // Validasi role
     ),
+  divisionId: z
+    .string()
+    .min(1, { message: 'Divisions is required.' }) // Role wajib diisi
+    .refine(
+      (value) => ['Agent', 'Supervisor', 'Admin'].includes(value),
+      { message: 'Invalid role. Allowed values: Agent, Supervisor, Admin.' } // Validasi role
+    ),
+  teamId: z
+    .string()
+    .min(1, { message: 'Team is required.' }) // Role wajib diisi
+    .refine(
+      (value) => ['Agent', 'Supervisor', 'Admin'].includes(value),
+      { message: 'Invalid role. Allowed values: Agent, Supervisor, Admin.' } // Validasi role
+    ),
 });
 
 export type UserFormInput = z.infer<typeof userFormSchema>;

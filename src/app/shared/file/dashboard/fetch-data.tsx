@@ -7,6 +7,9 @@ import { usePlans } from '@/app/api/plan/usePlan';
 import { usePlatform } from '@/app/api/platform/usePlatform';
 import { useCampaign } from '@/app/api/broadcast/useCampaign';
 import { useAgent } from '@/app/api/agent/useAgent';
+import { useDivisions } from '@/app/api/businesses/useDivisions';
+import { useTeams } from '@/app/api/businesses/useTeams';
+import { useBusinesses } from '@/app/api/businesses/useBusinesses';
 import { useBot } from '@/app/api/chatbot/useBot';
 import { useFilteredPlans } from '@/app/api/plan/usePlan';
 import toast from 'react-hot-toast';
@@ -23,7 +26,11 @@ export default function FetchDataDashboard() {
   const { isLoading: loadingPlatform, isError: errorPlatform } = usePlatform();
   const { isLoading: loadingContacts, isError: errorContacts } = useContacts();
   const { isLoading: loadingAgents, isError: errorAgents } = useAgent();
-
+  const { isLoading: loadingDivisions, isError: errorDivisions } =
+    useDivisions();
+  const { isLoading: loadingBusinesses, isError: errorBusinesses } =
+    useBusinesses();
+  const { isLoading: loadingTeams, isError: errorTeams } = useTeams();
   const isLoading = useMemo(
     () =>
       loadingTemplate ||
@@ -32,6 +39,9 @@ export default function FetchDataDashboard() {
       loadingReceipent ||
       loadingFilteredPlan ||
       loadingPlatform ||
+      loadingTeams ||
+      loadingDivisions ||
+      loadingBusinesses ||
       loadingContacts ||
       loadingCampaign ||
       loadingAgents,
@@ -40,6 +50,9 @@ export default function FetchDataDashboard() {
       loadingReceipent,
       loadingPlans,
       loadingBots,
+      loadingTeams,
+      loadingBusinesses,
+      loadingDivisions,
       loadingFilteredPlan,
       loadingPlatform,
       loadingContacts,
@@ -56,6 +69,9 @@ export default function FetchDataDashboard() {
       errorReceipent ||
       errorFilteredPlan ||
       errorPlatform ||
+      errorBusinesses ||
+      errorDivisions ||
+      errorTeams ||
       errorCampaign ||
       errorContacts ||
       errorAgents,
@@ -63,6 +79,9 @@ export default function FetchDataDashboard() {
       errorTemplate,
       errorBots,
       errorPlans,
+      errorDivisions,
+      errorTeams,
+      errorBusinesses,
       errorReceipent,
       errorFilteredPlan,
       errorPlatform,

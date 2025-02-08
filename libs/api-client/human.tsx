@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import apiClient from './index';
 import { agentData } from '@/data/agent-data';
 
@@ -12,7 +13,9 @@ export const addAgent = async (agentData: {
   email: string;
   password: string;
   role: string;
-}) => {
+  divisionId: string;
+  teamId: string;
+}): Promise<AxiosResponse<any>> => {
   const response = await apiClient.post(`agent`, agentData);
   console.log('Response from create subscription API:', response.data);
   return response;
