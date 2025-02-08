@@ -49,7 +49,7 @@
     "ahooks": "^3.8.1",
     "axios": "^1.7.9",
     "clsx": "^2.1.1",
-    "core": "workspace:*",
+    "core": "^1.0.0",
     "date-arithmetic": "^4.1.0",
     "dayjs": "^1.11.13",
     "eslint": "8.57.0",
@@ -126,9 +126,9 @@
     "prettier": "3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
     "rimraf": "^6.0.1",
-    "tailwind-config": "workspace:*",
+    "tailwind-config": "^1.0.0",
     "tailwindcss": "^3.4.13",
-    "typescript-config": "workspace:*"
+    "typescript-config": "^1.0.0"
   },
   "engines": {
     "node": ">=18.15.0"
