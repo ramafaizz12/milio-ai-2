@@ -9,18 +9,142 @@
  ✓ Compiled successfully
    Linting and checking validity of types ...
 
-Failed to compile.
-
-./src/app/(other-pages)/privacy-policy/page.tsx
-228:65  Error: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
-256:51  Error: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
-
 ./src/app/api/auth/auth.context.tsx
-34:6  Warning: React Hook useEffect has a missing dependency: 'router'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+25:6  Warning: React Hook useEffect has a missing dependency: 'router'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
 
-./src/app/multi-step/footer.tsx
-52:5  Error: Definition for rule 'react-hooks//exhaustive-deps' was not found.  react-hooks//exhaustive-deps
-53:6  Warning: React Hook useEffect has missing dependencies: 'resetLocation' and 'setFormData'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+./src/app/shared/ai-agents/navigation.tsx
+9:1  Warning: 'next/navigation' import is duplicated.  no-duplicate-imports
+
+./src/app/shared/connected-platform/add-platform.tsx
+55:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/app/shared/file/dashboard/fetch-data.tsx
+14:1  Warning: '@/app/api/plan/usePlan' import is duplicated.  no-duplicate-imports
+
+./src/app/shared/file/dashboard/menu-widgets.tsx
+13:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+30:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+46:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/app/shared/file/dashboard/openform-organization.tsx
+19:6  Warning: React Hook useEffect has missing dependencies: 'openModal' and 'setOpenForm'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
 
 info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
- ELIFECYCLE  Command failed with exit code 1.
+   Collecting page data ...
+   Generating static pages (0/95) ...
+   Generating static pages (23/95) 
+   Generating static pages (47/95) 
+   Generating static pages (71/95) 
+ ✓ Generating static pages (95/95)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                               Size     First Load JS
+┌ ○ /                                     5.94 kB         309 kB
+├ ○ /_not-found                           142 B          91.7 kB
+├ ○ /access-denied                        587 B           207 kB
+├ ○ /ai-agent                             3.45 kB         311 kB
+├ ○ /ai-agent/detail-page                 271 B          91.9 kB
+├ ○ /ai-agent/detail-page/general         2.52 kB         265 kB
+├ ○ /ai-agent/detail-page/knowledge       1.23 kB         225 kB
+├ ○ /analytics                            10.7 kB         457 kB
+├ ƒ /api/uploadthing                      0 B                0 B
+├ ○ /auth/forgot-password-1               5.84 kB         259 kB
+├ ○ /auth/forgot-password-2               4.47 kB         269 kB
+├ ○ /auth/forgot-password-3               1.93 kB         267 kB
+├ ○ /auth/forgot-password-4               2.88 kB         268 kB
+├ ○ /auth/forgot-password-5               4.18 kB         269 kB
+├ ○ /auth/otp-1                           2.95 kB         243 kB
+├ ○ /auth/otp-2                           7.08 kB         249 kB
+├ ○ /auth/otp-3                           3.09 kB         246 kB
+├ ○ /auth/otp-4                           5.46 kB         248 kB
+├ ○ /auth/otp-5                           5.38 kB         247 kB
+├ ○ /auth/sign-in-1                       2.83 kB         293 kB
+├ ○ /auth/sign-in-2                       4.96 kB         264 kB
+├ ○ /auth/sign-in-3                       2.41 kB         262 kB
+├ ○ /auth/sign-in-4                       3.26 kB         263 kB
+├ ○ /auth/sign-in-5                       4.61 kB         264 kB
+├ ○ /auth/sign-up-1                       2.7 kB          294 kB
+├ ○ /auth/sign-up-2                       4.98 kB         265 kB
+├ ○ /auth/sign-up-3                       2.44 kB         263 kB
+├ ○ /auth/sign-up-4                       3.34 kB         264 kB
+├ ○ /auth/sign-up-5                       4.63 kB         265 kB
+├ ○ /billings                             32.4 kB         325 kB
+├ ○ /blank                                310 B           202 kB
+├ ○ /broadcast                            211 B           440 kB
+├ ○ /broadcast/campaigns                  13.8 kB         439 kB
+├ ○ /broadcast/receipents                 210 B           440 kB
+├ ○ /broadcast/templates                  210 B           439 kB
+├ ○ /chat                                 1.98 kB         263 kB
+├ ○ /coming-soon                          6.27 kB         248 kB
+├ ○ /connected-platform                   3.85 kB         311 kB
+├ ○ /connected-platform/platform-add      875 B           203 kB
+├ ○ /contact                              9.36 kB         407 kB
+├ ○ /email-templates                      2.69 kB         235 kB
+├ ○ /event-calendar                       54.2 kB         378 kB
+├ ○ /file                                 3.97 kB         230 kB
+├ ○ /file-manager                         104 kB          449 kB
+├ ○ /forms/newsletter                     6.13 kB         261 kB
+├ ○ /forms/profile-settings               4.55 kB         252 kB
+├ ○ /forms/profile-settings/billing       11.4 kB         337 kB
+├ ○ /forms/profile-settings/integration   6.32 kB         230 kB
+├ ○ /forms/profile-settings/notification  2.66 kB         251 kB
+├ ○ /forms/profile-settings/password      271 B          91.9 kB
+├ ○ /forms/profile-settings/profile       6.21 kB         305 kB
+├ ○ /forms/profile-settings/team          9.53 kB         316 kB
+├ ○ /human-agent                          17.9 kB         440 kB
+├ ○ /image-viewer                         11.2 kB         243 kB
+├ ○ /invoice                              6.13 kB         383 kB
+├ ƒ /invoice/[id]                         10.3 kB         270 kB
+├ ƒ /invoice/[id]/edit                    187 B           341 kB
+├ ○ /invoice/builder                      13.9 kB         354 kB
+├ ○ /invoice/create                       187 B           341 kB
+├ ○ /logistics                            29.9 kB         572 kB
+├ ○ /logistics/customer-profile           18.7 kB         360 kB
+├ ○ /logistics/shipments                  21.7 kB         384 kB
+├ ƒ /logistics/shipments/[id]             3.52 kB         273 kB
+├ ƒ /logistics/shipments/[id]/edit        195 B           320 kB
+├ ○ /logistics/shipments/create           195 B           320 kB
+├ ○ /logistics/tracking                   310 B           202 kB
+├ ƒ /logistics/tracking/[id]              10.8 kB         274 kB
+├ ○ /maintenance                          2.36 kB         244 kB
+├ ○ /not-found                            2.61 kB         220 kB
+├ ○ /organization                         211 B           440 kB
+├ ○ /organization/businesses              211 B           439 kB
+├ ○ /organization/divisions               210 B           440 kB
+├ ○ /organization/teams                   210 B           440 kB
+├ ○ /privacy-policy                       202 B           202 kB
+├ ○ /profile                              41.8 kB         282 kB
+├ ○ /roles-permissions                    23.3 kB         325 kB
+├ ○ /search/flight                        39.4 kB         372 kB
+├ ○ /search/nft                           6.15 kB         245 kB
+├ ○ /search/real-estate                   15.1 kB         255 kB
+├ ○ /signin                               1.91 kB         258 kB
+├ ○ /support                              29.2 kB         582 kB
+├ ○ /support/inbox                        1.16 kB         312 kB
+├ ƒ /support/inbox/[id]                   552 B           304 kB
+├ ○ /support/snippets                     256 B           312 kB
+├ ○ /support/templates                    257 B           312 kB
+├ ○ /tables/basic                         4.32 kB         289 kB
+├ ○ /tables/collapsible                   5.56 kB         379 kB
+├ ○ /tables/dnd                           3.93 kB         292 kB
+├ ○ /tables/enhanced                      252 B           387 kB
+├ ○ /tables/pagination                    3.6 kB          387 kB
+├ ○ /tables/pinning                       1.75 kB         285 kB
+├ ○ /tables/resizable                     1.37 kB         285 kB
+├ ○ /tables/search                        2.08 kB         283 kB
+├ ○ /tables/sticky-header                 1.1 kB          283 kB
+├ ○ /welcome                              1.03 kB         201 kB
+├ ○ /widgets/cards                        10.4 kB         346 kB
+├ ○ /widgets/charts                       14.3 kB         339 kB
+├ ○ /widgets/icons                        15 kB           246 kB
+└ ○ /widgets/maps                         5.72 kB         289 kB
++ First Load JS shared by all             91.6 kB
+  ├ chunks/3391-52ed3a435bf27882.js       31.8 kB
+  ├ chunks/a6247b23-5b4aa16d788ab9c6.js   53.6 kB
+  └ other shared chunks (total)           6.18 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
